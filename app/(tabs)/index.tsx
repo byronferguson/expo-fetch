@@ -5,19 +5,21 @@ import { useState } from 'react';
 function HomeScreen() {
   // const [username, setUsername] = useState('fakefamily@ail.com');
   // const [password, setPassword] = useState('password');
-  const [username, setUsername] = useState('john_doe');
-  const [password, setPassword] = useState('pass123');
+  const [username, setUsername] = useState('LoriClark');
+  const [password, setPassword] = useState('myBeaut1fu11P@ssW0rd!');
   const [token, setToken] = useState('');
 
   async function attemptLogin(username: string, password: string) {
     try {
-      const res = await fetch('https://fakestoreapi.com/auth/login', {
+      const res = await fetch('https://freefakeapi.io/authapi/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password }),
       });
 
-      if (!res.ok || res.status !== 201) {
+      console.log('res :>> ', res);
+
+      if (!res.ok) {
         throw new Error('Network response was not ok');
       }
 

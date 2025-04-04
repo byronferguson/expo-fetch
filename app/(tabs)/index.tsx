@@ -3,18 +3,23 @@ import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-nativ
 import { useState } from 'react';
 
 function HomeScreen() {
-  // const [username, setUsername] = useState('fakefamily@ail.com');
-  // const [password, setPassword] = useState('password');
-  const [username, setUsername] = useState('LoriClark');
-  const [password, setPassword] = useState('myBeaut1fu11P@ssW0rd!');
+  const [username, setUsername] = useState('fakefamily@ail.com');
+  const [password, setPassword] = useState('password');
+  // const [username, setUsername] = useState('LoriClark');
+  // const [password, setPassword] = useState('myBeaut1fu11P@ssW0rd!');
   const [token, setToken] = useState('');
+
+  const authURL = 'http://127.0.0.1:3050/v2/auth/login';
+  const lbURL = 'https://develop.api.lessonbuddy.com/v2/auth/login';
+  const lb_info_URL = 'https://develop.api.lessonbuddy.com/v2/auth/info';
+  const fakeURL = 'https://freefakeapi.io/authapi/login';
 
   async function attemptLogin(username: string, password: string) {
     try {
-      const res = await fetch('https://freefakeapi.io/authapi/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password }),
+      const res = await fetch(lb_info_URL, {
+        method: 'GET',
+        headers: { 'client-platform-id': '4' },
+        // body: JSON.stringify({ username: 'fakefamily@ail.com', password: 'password' }),
       });
 
       console.log('res :>> ', res);
@@ -24,7 +29,8 @@ function HomeScreen() {
       }
 
       const data = await res.json();
-      setToken(data.token);
+      console.log('data :>> ', data);
+      // setToken(data.token);
       return data;
     } catch (error) {
       console.error('Error:', error);
@@ -33,8 +39,8 @@ function HomeScreen() {
 
   async function handleLogin() {
     // Call the login service
-    console.log('Username:', username);
-    console.log('Password:', password);
+    // console.log('Username:', username);
+    // console.log('Password:', password);
 
     await attemptLogin(username, password);
   }
